@@ -23,7 +23,7 @@ public class SY_AbillityProcedures : MonoBehaviour
 
     public void HitScanShoot()
     {
-        Debug.DrawLine(transform.position, transform.position + transform.right * 20f, Color.blue);
+        Debug.DrawLine(transform.position, transform.position + orientation.forward * 20f, Color.blue);
         if (Physics.Raycast(transform.position,transform.right,20f))
         {
             Debug.Log("PIOUUU");
@@ -32,7 +32,7 @@ public class SY_AbillityProcedures : MonoBehaviour
 
     public void ProjectileShoot()
     {
-        GameObject bullet = Instantiate(projectile,transform);
+        GameObject bullet = Instantiate(projectile, transform.position,orientation.rotation);
         bullet.transform.parent = null;
     }
 

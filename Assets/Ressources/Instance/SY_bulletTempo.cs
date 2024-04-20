@@ -13,7 +13,7 @@ public class SY_bulletTempo : MonoBehaviour
 
     private void Start()
     {
-        rb.velocity = transform.up * 20f;
+        rb.velocity = transform.forward * 20f;
         StartCoroutine(lifeSpan());
     }
 
