@@ -10,15 +10,15 @@ public class SY_useSpell : MonoBehaviour
     [SerializeField] private ParticleSystem hitscanprt;
 
 
-    [SerializeField] private float[] coolDowns;
-    [SerializeField] private float[] currentCoolDowns;
+    [SerializeField] public float[] coolDowns;
+    [SerializeField] public float[] currentCoolDowns;
 
     [SerializeField] private int[] stacks;
     [SerializeField] private int[] currentStacks;
 
     // time between two stacks
-    [SerializeField] private float[] stacksCD;
-    [SerializeField] private float[] currentStacksCD;
+    [SerializeField] public float[] stacksCD;
+    [SerializeField] public float[] currentStacksCD;
 
 
 
@@ -75,6 +75,7 @@ public class SY_useSpell : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Mouse1) && currentStacks[1] >= 0 && currentStacksCD[1] <= 0)
         {
+            Debug.Log("g mal au bras");
             currentStacks[1]--;
             currentStacksCD[1] = stacksCD[1];
             spells[1].procedure.Invoke();
