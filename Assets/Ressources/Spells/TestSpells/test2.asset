@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bb76b7c0fa4f1c4f8547fbf443698f0, type: 3}
-  m_Name: test
+  m_Name: test2
   m_EditorClassIdentifier: 
-  cooldown: 0.1
+  cooldown: 1
   castTime: 0
   cost: 0
-  stackCoolDown: 0.2
-  Stack: 0
-  type: 0
-  selectedProcedure: 1
+  stackCoolDown: 0.05
+  Stack: 5
+  type: 1
+  selectedProcedure: 2
   procedure:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SY_AbillityProcedures, Assembly-CSharp
-        m_MethodName: ProjectileShoot
+        m_MethodName: HitScanShoot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

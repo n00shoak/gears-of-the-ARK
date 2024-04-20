@@ -7,10 +7,13 @@ using UnityEngine.Events;
 public class SY_AbillityProcedures : MonoBehaviour
 {
     [SerializeField] public UnityEvent[] allprocedures;
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private Transform orientation;
 
     private void Awake()
     {
-    
+        rb = GetComponentInParent<Rigidbody>();
     }
 
     public void print()
@@ -25,5 +28,27 @@ public class SY_AbillityProcedures : MonoBehaviour
         {
             Debug.Log("PIOUUU");
         }
+    }
+
+    public void ProjectileShoot()
+    {
+        GameObject bullet = Instantiate(projectile,transform);
+        bullet.transform.parent = null;
+    }
+
+    public void Dash()
+    {
+        StartCoroutine(Dashing());
+    }
+
+    private IEnumerator Dashing()
+    {
+        MN_GeneralManager.GetManagerfromGeneral<MN_PlayerMovement>().enabled = false;
+        Vector3 initVel = rb.velocity;
+        rb.velocity = new Vector3(rb.velocity.x,0, rb.velocity.z).normalized * 50;
+        yield return new WaitForSeconds(0.2f);
+        rb.velocity = initVel;
+        MN_GeneralManager.GetManagerfromGeneral<MN_PlayerMovement>().enabled = true;
+
     }
 }

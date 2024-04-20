@@ -13,8 +13,6 @@ public class SY_SpellStorage : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(existingSpells.Length);
-
         for(int i = 0; i < existingSpells.Length; i++)
         {
             existingSpells[i].procedure = procedures.allprocedures[existingSpells[i].selectedProcedure];

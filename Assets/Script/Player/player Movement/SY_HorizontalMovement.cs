@@ -12,8 +12,6 @@ public class SY_HorizontalMovement : MonoBehaviour
     public Vector3 horizontalVelocity;
     private float veclocityX = 0 , veclocityZ = 0;
 
-
-
     public void setData(KeyCode[] keys, float[] stats)
     {
         mvmInputs = keys;
