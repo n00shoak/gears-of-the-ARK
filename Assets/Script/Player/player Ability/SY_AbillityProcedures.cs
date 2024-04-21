@@ -29,7 +29,7 @@ public class SY_AbillityProcedures : MonoBehaviour
 
         if (Physics.Raycast(transform.position,transform.right, out hit, 100f))
         {
-            iaTEUBE ennemisTOUCHED = hit.collider.gameObject.GetComponentInParent<iaTEUBE>();
+            iaTEUBE ennemisTOUCHED = hit.collider.gameObject.GetComponent<iaTEUBE>();
 
             if (ennemisTOUCHED != null)
             {
