@@ -25,7 +25,19 @@ public class SY_bulletTempo : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("projectileTouched");
-        Destroy(gameObject);
+        if(collision.gameObject.layer == gameObject.layer)
+        {
+            Debug.Log("projectileTouched");
+            iaTEUBE ennemisTOUCHED = collision.gameObject.GetComponent<iaTEUBE>();
+            if(ennemisTOUCHED != null) 
+            { 
+                ennemisTOUCHED.Stun();
+                Rigidbody foeRB = collision.gameObject.GetComponent<Rigidbody>();
+                foeRB.velocity = rb.velocity.normalized * 60f;
+            }
+
+            Destroy(gameObject);
+        }
+
     }
 }

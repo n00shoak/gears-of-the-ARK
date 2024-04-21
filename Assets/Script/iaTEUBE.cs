@@ -6,7 +6,7 @@ public class iaTEUBE : MonoBehaviour
 {
     public Transform targetObject; // GameObject vers lequel vous voulez vous déplacer
     public float speed = 2f; // Vitesse à laquelle vous voulez vous déplacer
-    bool sprint, sprinting;
+    public bool sprint, stun,trigger;
     float personality;
 
     private Rigidbody rb;
@@ -20,6 +20,8 @@ public class iaTEUBE : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(trigger) { Stun(); trigger = false; }
+
         if (targetObject != null)
         {
             // Calculer la direction vers l'objet cible
@@ -29,21 +31,29 @@ public class iaTEUBE : MonoBehaviour
             // Calculer la rotation pour regarder vers l'objet cible
             Quaternion lookRotation = Quaternion.LookRotation(direction);
 
-            // Appliquer la rotation de manière fluide
-            rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 1));
 
-            // Appliquer la vélocité pour se déplacer vers l'objet cible à une vitesse constante
-            rb.velocity = transform.forward * speed;
+            if(!stun)
+            {
+                // Appliquer la rotation de manière fluide
+                rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * personality));
+
+                // Appliquer la vélocité pour se déplacer vers l'objet cible à une vitesse constante
+                rb.velocity = transform.forward * speed;
+            }
         }
 
         if (Random.Range(0, 500) <= 1) { sprint = true; }
 
         if (sprint)
         {
-            Debug.Log(speed);
             StartCoroutine(RUN());
             sprint = false;
         }
+    }
+
+    public void Stun(float Time = 0.2f)
+    {
+        StartCoroutine(Stunned(Time));
     }
 
     IEnumerator RUN()
@@ -52,4 +62,13 @@ public class iaTEUBE : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         speed = 2;
     }
+
+    IEnumerator Stunned(float Time)
+    {
+        stun = true;
+        yield return new WaitForSeconds(Time);
+        stun = false;
+
+    }
+
 }

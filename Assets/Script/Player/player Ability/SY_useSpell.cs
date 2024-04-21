@@ -8,6 +8,7 @@ public class SY_useSpell : MonoBehaviour
     [SerializeField] private SY_SpellStorage storage;
     [SerializeField] private ParticleSystem nozzle;
     [SerializeField] private ParticleSystem hitscanprt;
+    [SerializeField] private SY_Energy energy;
 
 
     [SerializeField] public float[] coolDowns;
@@ -21,7 +22,10 @@ public class SY_useSpell : MonoBehaviour
     [SerializeField] public float[] currentStacksCD;
 
 
-
+    private void Awake()
+    {
+        energy = GetComponent<SY_Energy>();
+    }
 
     private void Start()
     {
@@ -64,8 +68,9 @@ public class SY_useSpell : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && currentStacks[0] >= 0 && currentStacksCD[0] <=0)
+        if (Input.GetKey(KeyCode.Mouse0) && currentStacks[0] >= 0 && currentStacksCD[0] <=0 && energy.currentEnergy - spells[0].cost > 0)
         {
+            energy.currentEnergy -= spells[0].cost;
             currentStacks[0] --;
             currentStacksCD[0] = stacksCD[0];
             spells[0].procedure.Invoke();
@@ -73,17 +78,18 @@ public class SY_useSpell : MonoBehaviour
             hitscanprt.Play();
         }
 
-        if (Input.GetKey(KeyCode.Mouse1) && currentStacks[1] >= 0 && currentStacksCD[1] <= 0)
+        if (Input.GetKey(KeyCode.Mouse1) && currentStacks[1] >= 0 && currentStacksCD[1] <= 0 && energy.currentEnergy - spells[1].cost > 0)
         {
-            Debug.Log("g mal au bras");
+            energy.currentEnergy -= spells[1].cost;
             currentStacks[1]--;
             currentStacksCD[1] = stacksCD[1];
             spells[1].procedure.Invoke();
             nozzle.Play();
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) && currentStacks[2] >= 0 && currentStacksCD[2] <= 0)
+        if (Input.GetKey(KeyCode.LeftShift) && currentStacks[2] >= 0 && currentStacksCD[2] <= 0 && energy.currentEnergy - spells[2].cost > 0)
         {
+            energy.currentEnergy -= spells[2].cost;
             currentStacks[2]--;
             currentStacksCD[2] = stacksCD[2];
             spells[2].procedure.Invoke();

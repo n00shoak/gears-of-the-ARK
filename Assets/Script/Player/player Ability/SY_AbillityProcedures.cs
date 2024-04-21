@@ -11,6 +11,8 @@ public class SY_AbillityProcedures : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform orientation;
 
+    Vector3 target;
+
     private void Awake()
     {
         rb = GetComponentInParent<Rigidbody>();
@@ -23,10 +25,22 @@ public class SY_AbillityProcedures : MonoBehaviour
 
     public void HitScanShoot()
     {
-        Debug.DrawLine(transform.position, transform.position + orientation.forward * 20f, Color.blue);
-        if (Physics.Raycast(transform.position,transform.right,20f))
+        RaycastHit hit = new RaycastHit();
+
+        if (Physics.Raycast(transform.position,transform.right, out hit, 100f))
         {
-            Debug.Log("PIOUUU");
+            iaTEUBE ennemisTOUCHED = hit.collider.gameObject.GetComponentInParent<iaTEUBE>();
+
+            if (ennemisTOUCHED != null)
+            {
+                ennemisTOUCHED.Stun(0.5f);
+
+                Rigidbody foeRB = hit.rigidbody;
+                if (foeRB != null)
+                {
+                    foeRB.velocity = Vector3.zero;
+                }
+            }
         }
     }
 

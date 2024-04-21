@@ -395,7 +395,7 @@ Transform:
   m_GameObject: {fileID: 83358800}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.83, z: -1.25}
+  m_LocalPosition: {x: 0, y: 0.83, z: 2}
   m_LocalScale: {x: 0.46387, y: 0.41328, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -549,7 +549,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -8768,7 +8768,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8838,7 +8838,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -8903,9 +8903,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.3
-      minScalar: 5
+      minMaxState: 3
+      scalar: 0.2
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -8956,9 +8956,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 50
-      minScalar: 5
+      minScalar: 30
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9658,7 +9658,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 200
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -9764,7 +9764,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -9775,21 +9775,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
+          value: 1
           inSlope: 0
-          outSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 0
+          value: 0.1948052
+          inSlope: -0.09334409
+          outSlope: -0.09334409
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.13913053
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -11201,7 +11201,7 @@ ParticleSystem:
       m_Bits: 4294967295
     influenceList: []
   ClampVelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -11422,7 +11422,7 @@ ParticleSystem:
     drag:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -12025,8 +12025,17 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 1
+          inSlope: -0.15721123
+          outSlope: -0.15721123
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33043474
+        - serializedVersion: 3
+          time: 0.5891533
+          value: 0.14144622
+          inSlope: 1.0408385
+          outSlope: 1.0408385
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
@@ -12035,7 +12044,7 @@ ParticleSystem:
           time: 1
           value: 1
           inSlope: 1
-          outSlope: 0
+          outSlope: 1
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
@@ -13676,6 +13685,7 @@ GameObject:
   - component: {fileID: 1770229992}
   - component: {fileID: 1770229995}
   - component: {fileID: 1770229996}
+  - component: {fileID: 1770229997}
   m_Layer: 3
   m_Name: Spells
   m_TagString: Untagged
@@ -13730,6 +13740,7 @@ MonoBehaviour:
   storage: {fileID: 1770229995}
   nozzle: {fileID: 1720329058}
   hitscanprt: {fileID: 83358803}
+  energy: {fileID: 0}
   coolDowns: []
   currentCoolDowns: []
   stacks: 
@@ -13844,6 +13855,22 @@ MonoBehaviour:
   projectile: {fileID: 5641519778911931104, guid: 5bf6de9d1bfc890418bf7c1c703d09c4, type: 3}
   rb: {fileID: 0}
   orientation: {fileID: 963194228}
+--- !u!114 &1770229997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770229990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe8f9fecfcf9dc44b2cb410051999bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnergy: 100
+  currentEnergy: 0
+  passifCharge: 5
+  energyBar: {fileID: 1645822866}
 --- !u!1 &1840385621
 GameObject:
   m_ObjectHideFlags: 3
