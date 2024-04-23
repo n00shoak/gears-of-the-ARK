@@ -6,46 +6,55 @@ using UnityEngine.UI;
 
 public class SY_SwitchMenu : MonoBehaviour
 {
-    [SerializeField] private Image transitionSlide;
-    [SerializeField] private GameObject cam;
+    [SerializeField] private GameObject camTRF;
+    [SerializeField] private GameObject transitionObject;
+    [SerializeField] private Image ammount;
+    [SerializeField] private float trsSpeed;
+    bool waiting;
 
-    public void startTransition(float target)
+    private void Awake()
     {
-        StartCoroutine(transition(target));
-    }
-
-
-    private IEnumerator transition(float targetPos)
-    {
-        transitionSlide.fillOrigin = 0;
-        StartCoroutine(slideIN());
-
-        yield return new WaitForSeconds(1f);
-        cam.transform.position = new Vector3(targetPos, 0, 0);
-        yield return new WaitForSeconds(1f);
-
-        transitionSlide.fillOrigin = 1;
-        StartCoroutine(slideOUT());
-    }
-
-
-    private IEnumerator slideIN()
-    {
-        transitionSlide.fillAmount = Mathf.Lerp(0, 1, 0.01f);
-        yield return new WaitForSeconds(0);
-        if(!(transitionSlide.fillAmount > 0.95f))
+        if (trsSpeed < 0 || trsSpeed > 1)
         {
-            StartCoroutine(slideIN());
+            Debug.LogWarning("trsSpeed data is susless >> value under 0 or over 1");
         }
     }
 
-    private IEnumerator slideOUT()
+    public void transition(float camPos)
     {
-        transitionSlide.fillAmount = Mathf.Lerp(1, 0, 0.01f);
-        yield return new WaitForSeconds(0);
-        if (!(transitionSlide.fillAmount < 0.05f))
+        Debug.Log("test A");
+        transitionObject.SetActive(true);
+        StartCoroutine(slide(camPos));
+    }
+    public IEnumerator slide(float cameraPos)
+    {
+        if (!waiting && ammount.fillAmount < 1)
         {
-            StartCoroutine(slideOUT());
+            Debug.Log("test C  " + ammount.fillAmount);
+            ammount.fillAmount = Mathf.Lerp(ammount.fillAmount, 1.1f, trsSpeed);
+            yield return new WaitForSeconds(0.01f);
+            StartCoroutine(slide(cameraPos));
+        }
+        else if (!waiting)
+        {
+            camTRF.transform.position = new Vector3(cameraPos, camTRF.transform.position.y, camTRF.transform.position.z);
+            yield return new WaitForSeconds(0.6f);
+            ammount.fillOrigin = 1;
+            waiting = true;
+        }
+
+        if (waiting && ammount.fillAmount > 0)
+        {
+            ammount.fillAmount = Mathf.Lerp(ammount.fillAmount, -0.1f, trsSpeed);
+            yield return new WaitForSeconds(0.01f);
+            StartCoroutine(slide(cameraPos));
+        }
+        else if (waiting)
+        {
+            ammount.fillOrigin = 0;
+            transitionObject.SetActive(false);
+            waiting = false;
+            yield return null;
         }
     }
 }

@@ -25,8 +25,6 @@ public class ButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     // >>> Hover effect <<<
     public void OnPointerEnter(PointerEventData eventData) // on hover enter
     {
-        Debug.Log("A");
-
         StopAllCoroutines();
         StartCoroutine(Resize(scaleBuff));
         StartCoroutine(fillIn(1.1f));
@@ -38,8 +36,6 @@ public class ButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("B");
-
         StopAllCoroutines();
         StartCoroutine(Resize(1));
         StartCoroutine(fillIn(-0.1f));

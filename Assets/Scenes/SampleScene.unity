@@ -9553,13 +9553,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159602e2dc39ffc40beed4b3230b4840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
-  acceleration: 0.075
-  friction: 0.01
+  maxSpeed: 10
+  acceleration: 5
+  friction: 0.5
   strafeMultiplier: 0.5
   Weight: 1
   slideForce: 0
-  gravity: 0.1
+  gravity: 0.5
   jumpForce: 10
   jumpAmmount: 2
 --- !u!114 &1702933328

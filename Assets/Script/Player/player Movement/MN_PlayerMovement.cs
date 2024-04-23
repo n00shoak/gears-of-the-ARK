@@ -36,6 +36,6 @@ public class MN_PlayerMovement : CL_Manager
 
     private void applyMovement()
     {
-        rb.velocity = Vector3.Lerp(horizontalmvm.horizontalVelocity + verticalmvm.veritcallVelocity, rb.velocity,Time.deltaTime * 50);
+        rb.velocity = horizontalmvm.horizontalVelocity + verticalmvm.veritcallVelocity;
     }
 }
